@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <div>{{word}}</div>
+        <form action="" v-on:submit.prevent="onSubmit">
+            <input type="text" v-model="value">
+            <button type="submit">입력</button>
+        </form>
+        <div>{{result}}</div>
+    </div>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                word: '대우',
+                value: '',
+                result: '결과'
+            },
+            methods: {
+                onSubmit() {
+                    if (this.value.length < 2) {
+                        this.result = '2글자 이상되어야 합니다.'
+                    } else {
+                        if (this.word[this.word.length - 1] == this.value[0]) {
+                            this.result = '정답!'
+                            this.word = this.value
+                        } else {
+                            this.result = '땡'
+                        }
+                        this.value = ''
+                    }
+                }
+            },
+        })
+    </script>
+</body>
+
+</html>

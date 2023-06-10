@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+        #app {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #000000;
+            flex-direction: column;
+            /* text-shadow: 0 0 3px rgba(0, 0, 0, 0.267); */
+            font-size: 100px;
+        }
+
+        button {
+            border: none;
+            font-size: 30px;
+            padding: 1rem 3rem;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <h1>{{myColor}}</h1>
+        <button @click="colorChange">color change</button>
+    </div>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                myColor: '#' + Math.round(Math.random() * 0xffffff).toString(16)
+            },
+            created() {
+                document.body.style.backgroundColor = this.myColor
+                document.querySelector('button').style.color = this.myColor
+            },
+            methods: {
+                colorChange() {
+                    this.myColor = '#' + Math.round(Math.random() * 0xffffff).toString(16)
+                    document.body.style.backgroundColor = this.myColor
+                    document.querySelector('button').style.color = this.myColor
+                }
+            },
+        })
+    </script>
+</body>
+
+</html>

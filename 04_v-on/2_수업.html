@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <input type="text" v-model="num1">
+        <div>
+            {{num2}}
+        </div>
+        <button @click="fn_clickBtn(num1)">click</button>
+    </div>
+    <script>
+        new Vue({
+            el: '#app',
+            data:{
+                num1:0,
+                num2:10
+            },
+            methods: {
+                fn_clickBtn(num){
+                    this.num2=20;
+                    console.log(num);
+                }
+            },
+        })
+    </script>
+</body>
+
+</html>

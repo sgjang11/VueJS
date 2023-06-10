@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+        span {
+            padding-right: 10px;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .content {
+            position: absolute;
+            left: 50%;
+            top: 100px
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <h1>여행리스트</h1>
+        <!-- {{travelList}} -->
+        <!-- <div>
+            <ul>
+                <li v-for="(city,i) in travelList" :key="i">
+                    {{city.name}}:{{city.distance}}
+                </li>
+            </ul>
+        </div> -->
+        <div v-for="(city,i) in travelList" :key="i">
+            <div @click="tab(i)">
+                <span>{{i}}</span>
+                {{city.name}}
+            </div>
+            <div class="content" v-if="i==index">
+                {{city.distance}}
+            </div>
+        </div>
+    </div>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                index: 0,
+                travelList: [
+                    {
+                        name: '강릉',
+                        distance: '차로 3시간'
+                    },
+                    {
+                        name: '부산',
+                        distance: '차로 5시간'
+                    },
+                    {
+                        name: '춘천',
+                        distance: '차로 2시간'
+                    },
+                    {
+                        name: '타이베이',
+                        distance: '비행기로 3시간'
+                    },
+                    {
+                        name: '마닐라',
+                        distance: '비행기로 5시간'
+                    },
+                    {
+                        name: '스페인',
+                        distance: '비행기로 17시간'
+                    }
+                ]
+            },
+            methods: {
+                tab(i) {
+                    this.index = i
+                }
+            },
+        })
+    </script>
+</body>
+
+</html>

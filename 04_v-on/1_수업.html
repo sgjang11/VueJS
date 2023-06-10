@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <!-- <button @click="fn_clickBtn">click</button> -->
+        <button v-on:click="fn_clickBtn(30)">click</button>
+    </div>
+    <script>
+        new Vue({
+            el: '#app',
+            methods: {
+                fn_clickBtn(num){
+                    alert('test: '+num);
+                }
+            },
+        })
+    </script>
+</body>
+
+</html>

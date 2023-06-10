@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+        body {
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+
+        #app {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .dark {
+            color: yellow;
+            background-color: #000;
+        }
+
+        .dark button {
+            color: #000;
+            background-color: yellow
+        }
+
+        h1 {
+            font-size: 5em;
+        }
+
+        .light {
+            background-color: yellow;
+            color: black
+        }
+
+        .light button {
+            color: yellow;
+            background-color: #000
+        }
+
+        button {
+            border: 0;
+            font-size: 1em;
+            padding: 1em;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app" :class="theme">
+        <h1>{{theme}}</h1>
+        <button @click="fn_changeTheme">color change</button>
+    </div>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                theme: 'dark'
+            },
+            methods: {
+                fn_changeTheme() {
+                    if (this.theme == 'dark') {
+                        this.theme = 'light'
+                    } else {
+                        this.theme = 'dark'
+                    }
+                }
+            },
+        })
+    </script>
+</body>
+
+</html>

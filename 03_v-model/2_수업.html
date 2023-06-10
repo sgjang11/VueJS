@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <input type="checkbox" name="fruite" id="apple" value="사과" v-model="checkNames">
+        <label for="apple">사과</label>
+        <input type="checkbox" name="fruite" id="orange" value="오렌지" v-model="checkNames">
+        <label for="orange">오렌지</label>
+        <input type="checkbox" name="fruite" id="grape" value="포도" v-model="checkNames">
+        <label for="grape">포도</label>
+        <input type="checkbox" name="fruite" id="banana" value="바나나" v-model="checkNames">
+        <label for="banana">바나나</label>
+
+        <div>
+            체크한 이름: {{checkNames}}
+        </div>
+    </div>
+    <script>
+        new Vue({
+            el: '#app',
+            data:{
+                checkNames:[]
+            }
+        })
+    </script>
+</body>
+
+</html>

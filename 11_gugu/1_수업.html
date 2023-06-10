@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <div>{{first}}*{{second}}=?</div>
+        <form action="">
+            <input type="text" v-model="value">
+            <button type="submit" @click.prevent="onSubmit()" @keyup.enter="onSubmit()">입력</button>
+        </form>
+        <div id="result">
+            {{result}}
+        </div>
+    </div>
+    <script>
+        new Vue({
+            el: '#app',
+            data:{
+                first:1+(Math.ceil(Math.random()*8)),
+                second:Math.ceil(Math.random()*9),
+                value:'',
+                result:'결과값'
+            },
+            methods: {
+                onSubmit(){
+                    if(this.first * this.second === parseInt(this.value)){
+                        this.result = '정답입니다.'
+                        this.first = 1+(Math.ceil(Math.random()*8))
+                        this.second = (Math.ceil(Math.random()*9))
+                    }else{
+                        this.result = '정답이 아닙니다.'
+                    }
+                    this.value = ''
+                }
+            },
+        })
+    </script>
+</body>
+
+</html>

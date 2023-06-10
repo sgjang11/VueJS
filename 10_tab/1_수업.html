@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        #app {
+            margin: 0 20px;
+            text-align: center;
+        }
+
+        h2 {
+            margin: 20px 0;
+        }
+
+        .btn_wrap {
+
+            display: flex;
+        }
+
+        .tab {
+            display: block;
+            width: 50%;
+            border-radius: 10px 10px 0 0;
+            background-color: rgb(221, 221, 221);
+        }
+
+        .tab.On {
+            background-color: blueviolet;
+            color: #fff
+        }
+
+        .box {
+            display: flex;
+            background-color: azure;
+            height: 300px;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <h2>tab menu 만들기</h2>
+        <div class="btn_wrap">
+            <span class="tab" v-for="(tab,i) in tabs" :key="i" @click="tabOpen(tab,i)" :class="{On:i==crt}">
+                {{tab}}
+            </span>
+        </div>
+        <div class="box">
+            content {{crt+1}}번의 {{crtTab}} 의 내용
+        </div>
+    </div>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                tabs: ['menu1', 'menu2', 'menu3'],
+                crt: 0,
+                crtTab: 'menu1'
+            },
+            methods: {
+                tabOpen(tab,i) {
+                    this.crtTab=tab
+                    this.crt=i
+                }
+            },
+        })
+    </script>
+</body>
+
+</html>

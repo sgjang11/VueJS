@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+        #box{
+            background-color: aqua;
+            color: blue;
+        }
+        .content{
+            background-color: bisque;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <p :id="idA">ID bind</p>
+        <p :class="classA">Class bind</p>
+    </div>
+    <script>
+        new Vue({
+            el: '#app',
+            data:{
+                idA:'box',
+                classA:'content'
+            }
+        })
+    </script>
+</body>
+
+</html>

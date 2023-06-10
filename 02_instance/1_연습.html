@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <h1>
+            <a :href="link" :target="target[0]">
+                <img :src="imgSrc" :title="title" >
+            </a>
+        </h1>
+    </div>
+    <script>
+        new Vue({
+            el: '#app',
+            data:{
+                imgSrc:'https://t1.daumcdn.net/daumtop_chanel/op/20200723055344399.png',
+                title:'다음으로 가는 링크',
+                link:'https://www.daum.net/',
+                target:['_blank','_self']
+            }
+        })
+    </script>
+</body>
+
+</html>
