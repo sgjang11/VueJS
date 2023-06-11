@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+        .list {
+            border: 3px solid #8b2525;
+            padding: 10px;
+            background-color: rgb(255, 228, 228);
+        }
+
+        .footer {
+            border: 3px solid #258b7a;
+            padding: 10px;
+            background-color: azure;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <todo-list></todo-list>
+        <todo-footer></todo-footer>
+    </div>
+    <script>
+        Vue.component('todo-list', {
+            template:` 
+            <div class="list">
+                <h2>{{title}}</h2>
+                <p>{{content}}</p>
+            </div>
+            `,
+            data(){
+                return {
+                    title: 'todo-list 입니다',
+                    content: '설명글입니다.'
+                }
+            }
+        })
+
+        const cmp = {
+            template:`
+                <div class="footer">
+                    <h2>{{title}}</h2>
+                    <p>{{content}}</p>
+                </div>
+            `,
+            data(){
+                return {
+                    title: 'todo-footer 입니다',
+                    content: '설명글입니다.' 
+                }
+            }
+
+        }
+
+        new Vue({
+            el: '#app',
+            components:{
+                'todo-footer': cmp
+            }
+        })
+    </script>
+</body>
+
+</html>

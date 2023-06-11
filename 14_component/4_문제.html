@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #app,
+        header,
+        article,
+        aside,
+        footer {
+            border: 1px solid #000;
+
+        }
+
+        #app {
+            padding: 10px;
+            text-align: center;
+        }
+
+        header {
+            background-color: aliceblue;
+            margin-bottom: 10px;
+            font-size: 10px;
+        }
+
+        .content {
+            display: flex;
+            margin-bottom: 10px;
+            justify-content: space-between;
+        }
+
+        aside,
+        article {
+            min-height: 200px;
+        }
+
+        aside {
+            width: 100px;
+        }
+
+        article {
+            width: calc(100% - 110px);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <app-header></app-header>
+        <div class="content">
+            <app-aside></app-aside>
+            <app-article></app-article>
+        </div>
+        <app-footer></app-footer>
+    </div>
+    <script>
+        const appHeader = {
+            template: `
+            <header>
+                <h1>{{title}}</h1>
+            </header>
+            `,
+            data() {
+                return {
+                    title: 'header 입니다',
+                }
+            }
+        }
+
+        const appAside = {
+            template: `
+            <aside>
+                <h1>{{title}}</h1>
+            </aside>
+            `,
+            data() {
+                return {
+                    title: 'aside 입니다',
+                }
+            }
+        }
+
+        const appArticle = {
+            template: `
+            <article>
+                {{title}}
+            </article>
+            `,
+            data() {
+                return {
+                    title: 'article 입니다',
+                }
+            }
+        }
+
+        const appFooter = {
+            template: `
+            <footer>
+                {{title}}
+            </footer>
+            `,
+            data() {
+                return {
+                    title: 'footer 입니다',
+                }
+            }
+        }
+
+        new Vue({
+            el: '#app',
+            components: {
+                'app-header': appHeader,
+                'app-aside': appAside,
+                'app-article': appArticle,
+                'app-footer': appFooter
+            }
+        })
+    </script>
+</body>
+
+</html>
