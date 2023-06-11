@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <style>
+    #app {
+      width: 100vw;
+      /* text-shadow: 0 0 3px rgba(0, 0, 0, 0.267); */
+    }
+    
+    button {
+      border: none;
+      font-size: 30px;
+      padding: 1rem 3rem;
+      cursor: pointer;
+      text-transform: uppercase;
+    }
+    .box {
+      max-height: 300px;
+      display: flex;
+      justify-content: center;
+      font-size: 50px;
+      align-items: center;
+      color: #000000;
+      flex-direction: column;
+
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <random-box v-on:color="colorChange" v-bind:propsdata="mycolor"></random-box>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    const randomBox={
+      props:['propsdata'],
+      template:`
+      <div class="box">
+      <h1>{{mycolor}}</h1>
+      <button @click="colorChange">play</button>
+      </div>
+      `,
+      data(){
+        return{
+          mycolor:this.propsdata
+        }
+      },
+      methods:{
+        colorChange(){
+          this.$emit('color')
+        }
+      }
+    } 
+    const BOX = document.querySelector('.box')
+    new Vue({
+      el: "#app",
+      data: {
+
+        mycolor: '#' + Math.round(Math.random() * 0xffffff).toString(16),
+        play: ''
+      },
+      created() {
+          this.colorChange()
+      },
+      methods: {
+        colorChange() {
+          this.mycolor = '#' + Math.round(Math.random() * 0xffffff).toString(16)
+          document.body.style.background = this.mycolor
+          document.querySelector('button').style.color = this.mycolor
+
+
+
+        },
+
+      },
+      components:{
+       'random-box':randomBox
+      }
+    });
+  </script>
+</body>
+
+</html>

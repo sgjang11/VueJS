@@ -1,0 +1,175 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title> Vue Router Sample </title>
+    <style>
+        .content {
+            width: 100vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #000000;
+            flex-direction: column;
+            /* text-shadow: 0 0 3px rgba(0, 0, 0, 0.267); */
+            font-size: 30px;
+        }
+
+        button {
+            border: none;
+            font-size: 30px;
+            padding: 1rem 3rem;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <h1>뷰 실습 예제</h1>
+        <p>
+            <router-link to="/"> 구구단 </router-link> <br />
+            <router-link to="/random">랜덤박스 </router-link> <br>
+            <router-link to="/endTalk"> 끝말잇기 </router-link>
+        </p>
+        <router-view></router-view>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router@3.0.1/dist/vue-router.js"></script>
+    <script>
+        const Gugu = {
+            template: `
+            <div class="content">
+                <div>{{first}} 곱하기 {{second}}는?</div>
+                <form action="">
+                    <input type="text" v-model="value">
+                    <button type="submit" @click.prevent="onSubmit" @keyup.enter="onSubmit">입력</button>
+                    </form>
+                    <div id="result">
+                        {{result}}
+                        </div>
+                        </div>
+            `,
+            data() {
+                return {
+
+                    // Math.ceil() : 소수점 이하를 올림한다
+                    // Math.ramdom()*8 ===>1~8사이===>+1 2~9사이
+                    first: 1 + (Math.ceil(Math.random() * 8)),
+                    second: Math.ceil(Math.random() * 9),
+                    result: '12',
+                    value: ''
+                }
+            },
+            methods: {
+                onSubmit() {
+
+                    //  parseInt() 함수는 문자열 인자를 파싱하여 특정 진수(수의 진법 체계에서 기준이 되는 값)의 정수를 반환
+                    if (this.first * this.second === parseInt(this.value)) {
+                        this.result = '정답'
+                        this.value = ''
+                        this.first = 1 + (Math.ceil(Math.random() * 8));
+                        this.second = Math.ceil(Math.random() * 9);
+                    } else {
+                        this.result = '땡'
+                        this.value = ''
+                    }
+
+                }
+            }
+        }
+        const Random = {
+            template: `<div class="content random">
+                            <h1>{{mycolor}}</h1>
+                            <button @click="colorChange">play</button>
+                </div>`,
+            data() {
+                return {
+                    mycolor: '#' + Math.round(Math.random() * 0xffffff).toString(16),
+                    play: ''
+                }
+            },
+            methods: {
+                colorChange() {
+                    // this.play= setInterval(function(){
+                    this.mycolor = '#' + Math.round(Math.random() * 0xffffff).toString(16)
+                    document.querySelector('.random').style.background = this.mycolor
+                    document.querySelector('button').style.color = this.mycolor
+
+
+                    // },1000)
+
+                }
+            }
+        }
+        const EndTalk = {
+            template: `
+                <div>
+                    <div>{{word}}</div>
+                        <form v-on:submit.prevent="onSubmit">
+                        <input type="text" v-model="value">
+                        <button type="submit">입력</button>
+                        </form>
+                        <div>{{result}}<br/></div>
+                </div>
+                `,
+            data() {
+                return {
+
+                    word: '대우 학생',
+                    value: '',
+                    result: ''
+                }
+            },
+            methods: {
+                onSubmit() {
+                    console.log(this.word[this.word.length - 1]);
+                    if (this.word[this.word.length - 1] === this.value[0]) {
+                        this.result = '딩동댕!'
+                        this.word = this.value;
+                        this.value = ''
+                    } else {
+                        this.result = '땡'
+                        this.value = ''
+                    }
+
+                }
+            },
+        };
+
+        var routes = [{
+            path: '/',
+            component: Gugu
+        },
+        {
+            path: '/random',
+            component: Random
+        },
+        {
+            path: '/endTalk',
+            component: EndTalk
+        },
+        ];
+
+        /*
+        vue-router의 기본 모드는 hash mode 입니다. URL 해시를 사용하여 전체 URL을 시뮬레이트하므로 URL이 변경될 때 페이지가 다시 로드 되지 않습니다.
+    
+    해시를 제거하기 위해 라우터의 history 모드 를 사용할 수 있습니다. history.pushState API를 활용하여 페이지를 다시 로드하지 않고도 URL 탐색을 할 수 있습니다.
+        
+        */
+        const router = new VueRouter({
+            mode: 'history',
+            routes
+        });
+
+        var app = new Vue({
+            router
+        }).$mount('#app');
+    </script>
+</body>
+
+</html>
