@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <my-component1 v-bind:keyword="word1" v-on:endTalk="endTalk1"></my-component1>
+        <my-component2 v-bind:keyword="word2" v-on:endTalk="endTalk2"></my-component2>
+        <my-component3 v-bind:keyword="word3" v-on:endTalk="endTalk3"></my-component3>
+    </div>
+    <script>
+        const cmp1 = {
+            props:['keyword'],
+            template: `
+            <div>
+                <div>{{keyword}}</div>
+                <form action="" v-on:submit.prevent="onSubmit">
+                    <input type="text" v-model="value">
+                    <button type="submit">입력</button>
+                </form>
+            </div>
+
+            `,
+            methods:{
+                onSubmit(){
+                    this.$emit('endTalk');
+                } 
+            },
+            data() {
+                return {
+                    value: '',
+                    result: '결과'
+                }
+            }
+        }
+        const cmp2 = {
+            props:['keyword'],
+            template: `
+            <div>
+                <div>{{keyword}}</div>
+                <form action="" v-on:submit.prevent="onSubmit">
+                    <input type="text" v-model="value">
+                    <button type="submit">입력</button>
+                </form>
+            </div>
+
+            `,
+            methods:{
+                onSubmit(){
+                    this.$emit('endTalk');
+                }
+            },
+            data() {
+                return {
+                    value: '',
+                    result: '결과'
+                }
+            }
+        }
+        const cmp3 = {
+            props:['keyword'],
+            template: `
+            <div>
+                <div>{{keyword}}</div>
+                <form action="" v-on:submit.prevent="onSubmit">
+                    <input type="text" v-model="value">
+                    <button type="submit">입력</button>
+                </form>
+            </div>
+
+            `,
+            methods:{
+                onSubmit(){
+                    this.$emit('endTalk');
+                }
+            },
+            data() {
+                return {
+                    value: '',
+                    result: '결과'
+                }
+            }
+        }
+        new Vue({
+            el: '#app',
+            data: {
+                word1 : '대우학생',
+                word2 : '초밥',
+                word3 : '바보'
+            },
+            methods: {
+                endTalk1() {
+                    if (this.value.length < 2) {
+                        this.result = '2글자 이상되어야 합니다.'
+                    } else {
+                        if (this.word[this.word.length - 1] == this.value[0]) {
+                            this.result = '정답!'
+                            this.word = this.value
+                        } else {
+                            this.result = '땡'
+                        }
+                        this.value = ''
+                    }
+                },
+                endTalk2() {
+                    if (this.value.length < 2) {
+                        this.result = '2글자 이상되어야 합니다.'
+                    } else {
+                        if (this.word[this.word.length - 1] == this.value[0]) {
+                            this.result = '정답!'
+                            this.word = this.value
+                        } else {
+                            this.result = '땡'
+                        }
+                        this.value = ''
+                    }
+                },
+                endTalk3() {
+                    if (this.value.length < 2) {
+                        this.result = '2글자 이상되어야 합니다.'
+                    } else {
+                        if (this.word[this.word.length - 1] == this.value[0]) {
+                            this.result = '정답!'
+                            this.word = this.value
+                        } else {
+                            this.result = '땡'
+                        }
+                        this.value = ''
+                    }
+                }
+            },
+            components: {
+                'my-component1': cmp1,
+                'my-component2': cmp2,
+                'my-component3': cmp3
+            }
+        })
+    </script>
+</body>
+
+</html>

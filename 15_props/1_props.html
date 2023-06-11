@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <my-component v-bind:propsdata="message" v-bind:propsdata2="message2"></my-component>
+    </div>
+    <script>
+        const cmp = {
+            props:['propsdata','propsdata2'],
+            template: `
+            <div>
+                <div>{{propsdata}}</div>
+                <div>{{propsdata2}}</div>
+                <h2>{{title}}</h2>
+                <p>{{content}}</p>
+            </div>
+            `,
+            data(){
+                return {
+                    title: '지역 컴포넌트',
+                    content: '설명글'
+                }
+            }
+        }
+
+
+        new Vue({
+            el: '#app',
+            data:{
+                message: 'hello',
+                message2: 'hello2'
+            },
+            components:{
+                'my-component' : cmp
+            }
+        })
+    </script>
+</body>
+
+</html>

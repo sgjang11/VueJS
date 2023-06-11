@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        {{num}}
+        <my-component v-on:add="addNum" v-on:delete="deleteNum"></my-component>
+    </div>
+    <script>
+        const cmp = {
+            template: `
+            <div>
+                <h2>{{title}}</h2>
+                <p>{{content}}</p>
+                <button @click="addEvent">add</button>
+                <button @click="deleteEvent">delete</button>
+                </div>
+            `,
+            methods:{
+                addEvent(){
+                    this.$emit('add');
+                },
+                deleteEvent(){
+                    this.$emit('delete');
+                }
+            },
+            data() {
+                return {
+                    title: '지역 컴포넌트',
+                    content: '설명글'
+                }
+            }
+        }
+        new Vue({
+            el: '#app',
+            data: {
+                num: 10
+            },
+            methods: {
+                addNum() {
+                    this.num++
+                },
+                deleteNum(){
+                    //this.num=''
+                    this.num--
+                }
+            },
+            components: {
+                'my-component': cmp
+            }
+        })
+    </script>
+</body>
+
+</html>
