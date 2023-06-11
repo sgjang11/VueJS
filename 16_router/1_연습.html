@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router@3.0.1/dist/vue-router.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <router-link to="/">main</router-link><br>
+        <router-link to="/login">login</router-link><br>
+        <router-link to="/company">company</router-link>
+        <router-view></router-view>
+    </div>
+    <script>
+        const Main = {
+            template:`
+            <div>main</div>
+            `
+        }
+
+        const Login = {
+            template:`
+            <div>login</div>
+            `
+        }
+        
+        const Company = {
+            template:`
+            <div>company</div>
+            `
+        }
+
+        const routes = [
+            {
+                path: '/',
+                component: Main
+            },
+            {
+                path: '/login',
+                component: Login
+            },
+            {
+                path: '/company',
+                component: Company
+            }
+        ]
+
+        const router = new VueRouter({
+            routes
+        })
+
+        const app = new Vue({
+            router
+        }).$mount('#app')
+    </script>
+</body>
+
+</html>

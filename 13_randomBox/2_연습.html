@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+        #app {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #000000;
+            flex-direction: column;
+            /* text-shadow: 0 0 3px rgba(0, 0, 0, 0.267); */
+            font-size: 100px;
+        }
+
+        button {
+            border: none;
+            font-size: 30px;
+            padding: 1rem 3rem;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <random-box v-bind:mycolor="myColor" v-on:random="randomColor"></random-box>
+    </div>
+    <script>
+        const cmp = {
+            props: ['mycolor'],
+            template: `
+            <div class="box">
+                <h1>{{mycolor}}</h1>
+                <button @click="colorChange">play</button>
+            </div>
+            `, data() {
+                return {
+                    mycolor: this.propsdata
+                }
+            },
+            methods: {
+                colorChange() {
+                    this.$emit('random');
+                }
+            }
+        }
+
+        new Vue({
+            el: '#app',
+            data: {
+                myColor: '#' + Math.round(Math.random() * 0xffffff).toString(16)
+            },
+            created() {
+                this.randomColor();
+            },
+            methods: {
+                randomColor() {
+                    this.myColor = '#' + Math.round(Math.random() * 0xffffff).toString(16)
+                    document.body.style.backgroundColor = this.myColor
+                    document.querySelector('button').style.color = this.myColor
+                }
+            },
+            components: {
+                'random-box': cmp
+            }
+        })
+    </script>
+</body>
+
+</html>

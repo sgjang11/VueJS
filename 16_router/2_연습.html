@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router@3.0.1/dist/vue-router.js"></script>
+    <style>
+        .randomBox{
+            width: 100vh;
+            height: 300px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div></div>
+        <router-link to="/gugu">구구단</router-link><br>
+        <router-link to="/randomBox">랜덤박스</router-link><br>
+        <router-link to="/endTalk">끝말잇기</router-link>
+        <router-view></router-view>
+    </div>
+    <script>
+        const Gugu = {
+            template: `
+            <div class="gugu">
+                <div>{{first}}*{{second}}=?</div>
+                <form action="">
+                    <input type="text" v-model="value">
+                    <button type="submit" @click.prevent="onSubmit()" @keyup.enter="onSubmit()">입력</button>
+                </form>
+                <div id="result">
+                    {{result}}
+                </div>
+            </div>
+            `,
+            data(){
+                return {
+                    first:1+(Math.ceil(Math.random()*8)),
+                    second:Math.ceil(Math.random()*9),
+                    value:'',
+                    result:'결과값'
+                }
+            },
+            methods: {
+                onSubmit(){
+                    if(this.first * this.second === parseInt(this.value)){
+                        this.result = '정답입니다.'
+                        this.first = 1+(Math.ceil(Math.random()*8))
+                        this.second = (Math.ceil(Math.random()*9))
+                    }else{
+                        this.result = '정답이 아닙니다.'
+                    }
+                    this.value = ''
+                }
+            },
+        }
+
+        const RandomBox = {
+            template: `
+            <div class="randomBox">
+                <h1>{{myColor}}</h1>
+                <button @click="colorChange">color change</button>
+            </div>
+            `,
+            data(){
+                return {
+                    myColor: '#' + Math.round(Math.random() * 0xffffff).toString(16)
+                }
+            },
+            methods:{
+                colorChange() {
+                    this.myColor = '#' + Math.round(Math.random() * 0xffffff).toString(16)
+                    document.querySelector('.randomBox').style.backgroundColor = this.myColor
+                    document.querySelector('button').style.color = this.myColor
+                }
+            }
+        }
+
+        const EndTalk = {
+            template: `
+            <div class="endTalk">
+                <div>{{word}}</div>
+                <form action="" v-on:submit.prevent="onSubmit">
+                    <input type="text" v-model="value">
+                    <button type="submit">입력</button>
+                </form>
+                <div>{{result}}</div>
+            </div>
+            `,
+            data(){
+                return {
+                    word: '대우',
+                    value: '',
+                    result: '결과'
+                }
+            },
+            methods:{
+                onSubmit() {
+                    if (this.value.length < 2) {
+                        this.result = '2글자 이상되어야 합니다.'
+                    } else {
+                        if (this.word[this.word.length - 1] == this.value[0]) {
+                            this.result = '정답!'
+                            this.word = this.value
+                        } else {
+                            this.result = '땡'
+                        }
+                        this.value = ''
+                    }
+                }
+            }
+        }
+
+        const routes = [
+            {
+                path: '/gugu',
+                component: Gugu
+            },
+            {
+                path: '/randomBox',
+                component: RandomBox
+            },
+            {
+                path: '/endTalk',
+                component: EndTalk
+            }
+        ]
+
+        const router = new VueRouter({
+            routes
+        })
+
+        const app = new Vue({
+            router
+        }).$mount('#app')
+    </script>
+</body>
+
+</html>
